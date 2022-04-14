@@ -1,0 +1,43 @@
+#========================================
+# Create windowed dataset from raw ns3 logs
+#========================================
+training_data_generator.py (used functions from rawDataHandler.py)
+
+
+#========================================
+# Train RF and XGB models 
+#========================================
+run_rf_xgb.ipynb (uses functions from brate_trainer_rf_xgb.py)
+
+
+#========================================
+# Train MLP and LSTM models
+#========================================
+run_mlp_lstm.ipynb (used functions from brate_trainer_mlp_lstm.py)
+
+
+#=========================================================================
+# Create predictions and groundtruth formattel files for prefetcher to use
+#=========================================================================
+formatted_predictions_for_prefetching_eval.ipynb
+formated_ground_truth_for_prefetching_eval.R
+
+
+#==================================================
+# Plotting functions
+#==================================================
+plots_exploratory_data_analysis.ipynb (plots histograms and correlation heatmap from dataset)
+plots_prediction_results.ipynb (plots results feature importance, prediction accuracy and confusion matrix)
+
+
+#=====================================================
+# Helper functions that are called by several scripts 
+#=====================================================
+data_columns.py
+load_data.py
+
+
+#====================================================================================
+# Contains teh code used for the two step formulation with brate and nseg prediction
+#====================================================================================
+two_step_nseg_brate_prediction

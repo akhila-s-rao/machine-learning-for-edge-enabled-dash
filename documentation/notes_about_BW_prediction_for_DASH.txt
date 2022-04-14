@@ -1,0 +1,46 @@
+================================
+Literature survey search strings
+================================
+wireless bandwidth estimation for DASH
+wireless bandwidth estimation for adaptive video streaming
+radio network bandwidth estimation for adaptive video streaming
+buffer estimation for adaptive video streaming 
+buffer estimation for network controlled adaptive video streaming 
+server side buffer estimation for adaptive video streaming 
+
+
+
+
+
+The prediction algorithm will used at the video server which has access to the RAN metrics and other higher layer metrics of all eNodeBs under its control. 
+
+We are assuming that the wired part of the network does not incur any delay and that all delay and variability is due to the wireless link.
+
+The objective is to pre-fetch based on several objectives. The segment quality to pre-fetch is decided based on predicted segment quality to be requested by a client in the next x window, or for the next segment request. This is done using RAN metrics available at eNodeBs and higher layer metrics (throughput). We do not really need to predict attainable throughput (or link bandwidth), we only need to predict the next n segment qualities that will be requested by a client. This is basically reverse engineering the prediction and segment quality decision made at the client. This way we can accomodate any algorithm at the client if we can observe equivalent metrics and train for it (maybe online to adjust for difference in algos at client).
+
+So if the client algorithm uses buffer information, then that should be available at the eNodeB too, or other metrics that can predic it. 
+
+If the client has implemented an inaccurate prediction algorithm for bandwidth estimation, and is basing its segment requests aded on that, then the algorithm at the eNodeB will have to match that. It it used a more accurate prediction of the bandwidth, then that is not useful since we cannot deliver to the client a higher bitrate segment than it asked for (even if it is possible over the current channel).
+
+The dataset generated/used needs to capture the full range of variation of all metrics used as input.
+            
+
+Does a client request a specific bitrate upfront or does it request it as a combination of a lower bitrate and a patch to convert it to higher bitrate ? So in our case, if we have a higher bitrate video segment in th ebuffer, but the client requests for a lower itrate one then we are weighing the cost of transcoding against the cost of requesting for a lower bitrate verison right ?? I saw a paper qwhere they eliminate need for badwidth estimation by always getting the lowest itrate first and then requesting additional layers ...  
+
+Could we do something like TCP congestion control for rate adaptation in DASH ? 
+
+We do not need to evaluate any QoE metric since we are not trying to improve ABR in DASH. So we do not control how well it does, and the main algorithm that contributes to QoE is the ABR algorithm. The pre-fetching algorithm reduces backhaul BW utilization, by caching segments will be requested by multiple clients. We are not considering any benefits in delay since we are assuming that the backhaul has no delay. So this means that there if there is only one client then there is no benefit in caching since the delay cost to fetch from cache and to fetch from video server are the same.  
+
+
+=======================================
+The feature, problem and solution space
+=======================================
+
+- We have RAN metrics, higher layer traffic metrics (thput of previous segments) and we have client requested segment bitrate.
+- The client requested bitrate is the ground truth or labels in this supervised learnign problem. The rest of the observations are the input metrics or features.  
+- We need to choose a history window for the metrics this can be in time X. We need to choose a prediction horizon for the output labels. This can be in Y chunks into the future.     
+- It is a classification problem with B different segment bitrates that can be potentially asked for as the labels.
+- Input metrics are all cardinal numbers. (CQI, MCS could be ordinal numbers... Not sure.)
+- The output label is an ordinal number. If we just assume that it is nominal then are we losing some information ? 
+- When computing error atleast we need to consider that the output laels are ordinal and assign higher error was a more distant wrong prediction. 
+- Potential candidate algorithms are SVMs, random forests. 

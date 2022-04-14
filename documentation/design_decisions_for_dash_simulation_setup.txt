@@ -1,0 +1,72 @@
+
+
+
+The number of 
+
+
+Num. of PRBs Dl is set to 25 so peak Dl throughput is around 17 Mbps
+
+The min video bitrate chosen in 0.4 Mbps so 17/0.4 = 42.5 UEs/eNodeB can be supported. 
+
+If we are using 9 macro eNodeBs and 250 UEs then each eNodeB on an average will have 250/9 = 27.7 UEs connected. But depending on the distribution of UEs and mobility patterns it can be a lot more. 
+
+I need to either reduce the min quality or I need to reduce number of UEs per basestation or I need to increase the bandwidth of the eNodeBs
+
+I am going to try increasing the PRBs of macro eNodeB to 50.   
+
+
+
+
+
+===================================================
+lena dual stripe
+===================================================
+
+  nBlocks: 1
+  nApartmentsX: 10
+  nFloors: 1
+  nMacroEnbSites 3
+  nMacroEnbSitesX: 1
+  interSiteDistance: 500
+  # How much the UE area extends outside the macrocell grid expressed as fraction of the interSiteDistance
+  areaMarginFactor: 0.5
+  macroUeDensity: 0.00002
+  homeEnbDeploymentRatio: 0.2 
+  homeEnbActivationRatio: 0.5
+  homeUesHomeEnbRatio: 1.0
+  macroEnbTxPowerDbm: 46.0
+  homeEnbTxPowerDbm: 20.0
+  macroEnbDlEarfcn: 100
+  homeEnbDlEarfcn: 100
+  macroEnbBandwidth: 25
+  homeEnbBandwidth: 25
+  randSeed: 13
+  numVideos: 1
+  simTime: 0.25
+  maxStartTimeDelay: 10
+  epc: 
+  epcDl:
+  epcUl:
+  useUdp:
+  useDash:
+  generateRem:
+  remRbId:
+  fadingTrace:
+  numBearersPerUe: 1
+  srsPeriodicity: 320
+  outdoorUeMinSpeed: 
+  outdoorUeMaxSpeed: 0
+  targetDt: 35 s
+  window: 10 s
+  algorithms: 
+  bufferSpace: 30000000
+
+
+The simulation setup seems to be around 967 X 967 meters
+If every node should have the option of HD with 5 Mbps, then with 100 PRBs around 14 UEs can be supported per eNodeB.
+
+with 9 macro eNodeBs as now with 100 PRBs we can support 9 X 14 = 126 UEs. 
+
+
+
+

@@ -1,0 +1,63 @@
+Audio and video are sent separately in steaming. 
+
+==========
+Resolution
+==========
+This is for each frame
+144p = 256 X 144
+240p = 352 x 240
+360p = 480 x 360
+480p = 858 x 480 — also known as SD
+720p = 1280 x 720 — the old TVs of this resolution were marked HDready
+1080p = 1920 x 1080 — FullHD
+2160p = 3860 x 2160 —Ultra-HD, also known as 4K (that’s a marketing trick)
+
+"p" stands for progressive scanning and indicates number of lines and hence in turn indicates number of vertical pixels
+
+The rates that we use now are 0.4, 0.8, 1.5, 3.0 and 5.0 Mbps (HD)
+
+==========
+Frame rate
+==========
+Common frame rates include 24, 25, 30, 48, 50, 60 frames per second (other frame rates are also acceptable).
+
+The time between frames that has been set in DjVergad is 20 ms, so this translates to 1frame/20ms = 50 frames per second. 
+This should remain fixed. 
+
+
+If I want to increase segment duration then that means each segment has more frames with the same inter frame time.  
+Each frame in the video corresponds to a packet. So instead of increasing the bits in a packet, the size of the packet is kept the same and the number of packets per segment are increased. 
+The size of each packet depends on the resolution which is the segment quality or bitrate. 
+bitrate = resolution = rate required to suatain the video stream 
+
+
+
+
+The rate values in each ABR algorithm .cc files represents bitRate in dash-client. This is set as Resolution in https header. 
+
+frame size in bits = resolution(bits/s)  / (50 frames/s) = bits/frame
+# Maybe they use a variable frame size because each frame is not coded with the same number of bits. They could use difference between frames to encode or some other method. But if the frame rate is the same and the resoulution is the same, what does it mean for the frame size to vary ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  
+
+  
+
+

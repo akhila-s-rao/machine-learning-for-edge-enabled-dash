@@ -1,0 +1,62 @@
+
+===============
+DASHbed dataset
+===============
+available at: https://www.ucc.ie/en/misl/research/datasets/dashbed/
+- Collected over 3G scenario or 4G-WiFi scenario
+- Max 4 clients and 10 competing clients scenario
+- Generated using their dash client and dash server code, also provided at this link. 
+- One can install their server and client on virtula machines and generate own dataset. 
+- One can also install them and run on real machines.
+- No radio metric metrics used. 
+- Metrics available in dataset
+Seg_#, Arr_time, Del_Time, Stall_Dur, Rep_Level, Del_Rate, Act_Rate, Byte_Size, Buff_Level, RTT, Codec, Width, Height, FPS, Seg_Dur, Start, P.1203, QoE
+
+=========================
+Beyond throughput dataset
+=========================
+available at: https://www.ucc.ie/en/misl/research/datasets/ivid_4g_lte_dataset/
+
+4G-LTE dataset
+- Contains 135 traces, with an average duration of fifteen minutes per trace
+- Viewable throughput ranges from 0 to 173 Mbit/s at a granularity of one sample per second. 
+- Traces are generated using G-NetTrack Pro app on an Android cellphone.
+- Datasets from bus, car, pedestrian, static, train mobility scenarios available. 
+- There are missing values in distance to cell when the GPS coordinate of the eNodeB is unavailable. THese are marked with - 
+- Metrics available in dataset
+Timestamp,Longitude,Latitude,Speed,Operatorname,CellID,NetworkMode,RSRP,RSRQ,SNR,CQI,RSSI,DL_bitrate,UL_bitrate,State,NRxRSRP,NRxRSRQ,ServingCell_Lon,ServingCell_Lat,ServingCell_Distance
+
+ns3 dataset
+- Contains seven-cell cluster with 100 mobile users. 
+- All users have constant velocity of 80kmph and use Gauss-Markov mobility pattern.
+- The link provides the pacthes to apply to ns3 and the simulation script.
+
+=======================
+haraldott ns3 DASH code
+=======================
+available at:https://github.com/haraldott/dash
+- ABR alghorithms availabe are tobasco, panda, festive. 
+- ABR algorithms return the following 
+	-nextRepIndex; // representation level index of the next segement to be downloaded by the client
+	-nextDownloadDelay; // delay time in microseconds when the next segment shall be requested from the server
+	-decisionTime; // time in microsends when the adaptation algorithm decided which segment to download next, only for logging purposes
+	-decisionCase; // indicate in which part of the adaptation algorithm's code the decision was made, which representation level to request next, only for logging purposes
+	-delayDecisionCase; // indicate in which part of the adaptation algorithm's code the decision was made, how much time in microsends to wait until the segment shall be requested from server, only for logging purposes
+- Input to all algorithms is videoData, playbackData, bufferData, throughput
+- None of the ABRs consider radio metrics
+
+======================
+Djvergad ns3 DASH code
+======================
+available at: https://github.com/djvergad/dash
+- ABR algorithms implemented are FDASH, AAASH, OSMF, SVAA, RAAHS, SFTM.
+- None of the algorithms use radio metrics
+- Log output looks like this 
+0.829568 Node: 0 newBitRate: 89000 oldBitRate: 45000 estBitRate: 205177 interTime: 0 T: 1.4284 dT: 0 del: +0.0ns 
+
+===================
+MPTCP ns3 DASH code 
+===================
+available at: https://github.com/vitaliipoliakov/ns3-dash-mptcp
+- They use MPTCP and MPEG-DASH. We do not know what ABR they use. 
+- No radio metrics considered. 
